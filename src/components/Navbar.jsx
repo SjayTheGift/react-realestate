@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
@@ -12,10 +12,25 @@ const Navbar = () => {
     setNav(!nav);
   };
 
+  useEffect(() => {
+    const changeColor = () => {
+      if (window.scrollY >= 90) {
+        setShadow('shadow-lg');
+        setBgColor('bg-white');
+        
+      } else {
+        setBgColor('bg-gray-100');
+        setShadow('shadow-none');
+        // setTextColor('#ffffff');
+      }
+    };
+    window.addEventListener('scroll', changeColor);
+  }, []);
+
   return (
 
 
-    <header className='bg-white fixed w-full z-[100] top-0 left-0'>
+    <header className={`${bgColor} ${shadow} bg-white fixed w-full z-[100] top-0 left-0`}>
         <nav className='flex justify-between items-center w-[75%] mx-auto py-3'>
             <div className='z-[30]'>
                 <Link to='/' className='text-purple-600 font-bold text-2xl cursor-pointer'>Property</Link>
