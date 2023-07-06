@@ -8,6 +8,8 @@ import person from '../assets/img/02.webp'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 
+import ContactForm from '../components/ContactForm'
+
 const Details = () => {
     const { id } = useParams();
 
@@ -36,9 +38,6 @@ const Details = () => {
                      setRealtor(data)
             })
             
-
-
-
           })
       }
     
@@ -46,8 +45,9 @@ const Details = () => {
         fetchSingleUserData()
     }, [])
 
-    const [visible, setVisible] = useState(true);
-
+    const [formData, setFormData] = useState({});
+    const { name, email, subject, message } = formData;
+    
   return (
     <div className='h-screen bg-white text-black py-16'>
 
@@ -65,12 +65,6 @@ const Details = () => {
         </div>
     </div>
     
-    
-    
-
-
-
-
         <div className='grid lg:grid-cols-3 w-[75%] mx-auto py-3 gap-4'>
             <div className='lg:col-span-2'>
                 <div>
@@ -104,22 +98,14 @@ const Details = () => {
                             <p className='flex items-center'><BiPhoneCall  className='mr-1' size={20}/>{realtor.phone}</p>
                             <p className='flex items-center'><HiOutlineMail className='mr-1' size={20}/>{realtor.email}</p>
                         </div>
-                        <form className="space-y-4 md:space-y-6" >
-                            <div>
-                                <label htmlFor="fullname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Fullname</label>
-                                <input type="text" name="fullname" id="fullname" value=''  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John Doe" required="" />
-                            </div>
-                            <div>
-                                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email</label>
-                                <input type="email" name="email" id="email" value='' className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="" />
-                            </div>
-                            <div>
-                                <label htmlFor="firstname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Message</label>
-                                <textarea type="text" rows='4' name="first_name" id="first_name" value=''  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave your message" required=""></textarea>
-                            </div>
-
-                            <button type="submit" className="w-full bg-purple-600 px-5 py-2 rounded-full hover:bg-purple-800  ease-in duration-300 hover:shadow-md text-white">Create an account</button>
-                        </form>
+                        <ContactForm 
+                        name={name} 
+                        email={email} 
+                        subject={subject} 
+                        message={message}
+                        formData={formData}
+                        setFormData={setFormData}
+                        />
                     </div>
                 </div>
             </div>

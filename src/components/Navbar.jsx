@@ -44,9 +44,6 @@ const Navbar = () => {
                         <Link to="/about" onClick={() => setNav(!nav)} >About</Link>
                     </li>
                     <li className='hover:text-purple-600 duration-500 md:my-0 my-3 cursor-pointer'>
-                        <Link to="/listings" onClick={() => setNav(!nav)} >Listings</Link>
-                    </li>
-                    <li className='hover:text-purple-600 duration-500 md:my-0 my-3 cursor-pointer'>
                         <Link to="/contact" onClick={() => setNav(!nav)} >Contact</Link>
                     </li>
                 </ul>

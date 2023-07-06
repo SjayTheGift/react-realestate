@@ -3,7 +3,7 @@ import hero from '../assets/img/hero-image.webp';
 
 import SearchHero from './SearchHero';
 
-const Hero = () => {
+const Hero = ({onSubmit, onChange, sale_type, province, price, bedrooms, home_type, bathrooms, sqft, listings}) => {
   return (
     <div className='bg-white relative py-16'>
       <div className='flex flex-col-reverse md:flex-row justify-between items-center w-[75%] mx-auto py-3 gap-4 md:gap-0'>
@@ -16,7 +16,18 @@ const Hero = () => {
         </div>
       </div>
       <div>
-        <SearchHero />
+        <SearchHero 
+        onSubmit={onSubmit}
+        onChange={onChange}
+        sale_type={sale_type}
+        province={province}
+        price={price}
+        bedrooms={bedrooms}
+        home_type={home_type}
+        bathrooms={bathrooms}
+        sqft={sqft}
+        listings={listings}
+        />
       </div>
 
     </div>
