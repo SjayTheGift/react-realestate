@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { logout } from '../features/auth/authActions';
+import { reset } from '../features/auth/authSlice';
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -11,6 +15,12 @@ const Navbar = () => {
   const handleNav = () => {
     setNav(!nav);
   };
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const {   userToken  } = useSelector((state) => state.auth)
+
 
   useEffect(() => {
     const changeColor = () => {
@@ -24,8 +34,15 @@ const Navbar = () => {
         // setTextColor('#ffffff');
       }
     };
+    dispatch(reset());
+
     window.addEventListener('scroll', changeColor);
-  }, []);
+  }, [userToken]);
+
+ const onLogout = () => {
+  dispatch(logout());
+  // dispatch(reset());
+ }
 
   return (
 
@@ -52,10 +69,22 @@ const Navbar = () => {
                     <Link to='/register' className='border border-purple-600 text-purple-600 px-5 py-2 rounded-full hover:bg-purple-800 hover:text-white' onClick={() => setNav(!nav)} >Sign Up</Link>
                 </div>
             </div>
-            <div className='hidden md:flex gap-4 text-sm font-semibold'>
+            {userToken ? (
+              <button className='
+              bg-purple-600 text-white px-3 
+              py-2 rounded-full 
+              hover:bg-purple-800' onClick={() => {
+                onLogout()
+                setNav(!nav)}
+
+              }>Logout</button>
+            ) : (
+              <div className='hidden md:flex gap-4 text-sm font-semibold'>
                 <Link to='/login' className='bg-purple-600 text-white px-3 py-2 rounded-full hover:bg-purple-800' onClick={() => setNav(!nav)} >Sign In</Link>
                 <Link to='/register' className='border border-purple-600 text-purple-600 px-3 py-2 rounded-full hover:bg-purple-800 hover:text-white' onClick={() => setNav(!nav)} >Sign Up</Link>
-            </div>
+              </div>
+            )}
+            
             <div onClick={() => setNav(!nav)} className='text-2xl absolute right-8 cursor-pointer md:hidden'>
                     {nav ? <AiOutlineClose />  :<AiOutlineMenu /> }
             </div>

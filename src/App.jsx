@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import {BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -12,9 +12,17 @@ import Contact from './pages/Contact'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import Details from './pages/Details'
+import NotFound from './pages/NotFound';
+import { PrivateRoute } from './utils/PrivateRoute';
+import { history } from './utils/_Helpers';
 
 
 function App() {
+
+  // init custom history object to allow navigation from 
+  // anywhere in the react app (inside or outside components)
+  history.navigate = useNavigate();
+  history.location = useLocation();
 
 
   const [loading, setLoading] = useState(false);
@@ -84,10 +92,10 @@ function App() {
 
   return (
     <div className="font-[Poppins] bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] h-screen">
-      <Router>
         <Navbar />
         <ToastContainer/>
         <Routes>
+          <Route path='*' element={<NotFound />}/>
           <Route path='/'  element={<Home
           onSubmit={onSubmit}
           onChange={onChange}
@@ -100,7 +108,11 @@ function App() {
           sqft={sqft}
           listings={listings}
           />}/>
-          <Route path='/about'  element={<About/>}/>
+          <Route path='/about'  element={
+            <PrivateRoute>
+              <About/>
+            </PrivateRoute>
+          }/>
           {/* <Route path='/listings'  element={<Listings 
           onSubmit={onSubmit}
           onChange={onChange}
@@ -118,8 +130,6 @@ function App() {
           <Route path='/register'  element={<SignUp/>}/>
           <Route path='/details/:id'  element={<Details/>}/>
         </Routes>
-      </Router>
-      
     </div>
   )
 }

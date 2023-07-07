@@ -22,7 +22,7 @@ const SignUp = () => {
     const dispatch = useDispatch()
 
     // Get data from redux store
-    const {user, isLoading, isError,  isSuccess, message}  = useSelector(
+    const {userToken, isLoading, isError,  isSuccess, message}  = useSelector(
         (state) => state.auth)
 
 
@@ -31,12 +31,12 @@ const SignUp = () => {
             toast.error(message)
         }
     
-        if (isSuccess || user) {
-            navigate('/')
+        if (isSuccess) {
+            navigate('/login')
         }
     
         dispatch(reset())
-    }, [user, isError, isSuccess, message, navigate, dispatch])
+    }, [userToken, isError, isSuccess, message, navigate, dispatch])
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -58,7 +58,6 @@ const SignUp = () => {
     }
   }
 
-  const accountType = 'developer'
   const bgColor = 'dark:bg-gray-900'
 
  

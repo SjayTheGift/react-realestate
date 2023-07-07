@@ -21,7 +21,7 @@ const SignIn = () => {
     const dispatch = useDispatch()
 
     // Get data from redux store
-    const {user, isLoading, isError,  isSuccess, message}  = useSelector(
+    const {userToken, isLoading, isError,  isSuccess, message}  = useSelector(
         (state) => state.auth)
 
     useEffect(() => {
@@ -29,12 +29,11 @@ const SignIn = () => {
                 toast.error(message)
             }
         
-            if (isSuccess || user) {
+            if (isSuccess || userToken) {
                 navigate('/')
             }
-        
-            dispatch(reset())
-    }, [user, isError, isSuccess, message, navigate, dispatch])
+            // dispatch(reset())
+    }, [userToken, isError, isSuccess, message, navigate, dispatch])
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -43,7 +42,7 @@ const SignIn = () => {
         }))
     }
 
-  const onSubmit = (e) => {
+  const onSubmit =  (e) => {
     e.preventDefault()
      // Run the authentication function
     dispatch(login(formData))

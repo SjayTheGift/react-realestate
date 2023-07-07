@@ -1,65 +1,74 @@
-import { createSlice, createAsyncThunk} from '@reduxjs/toolkit'
-import axios from 'axios'
-import { register, login } from './authActions'
-// import authService from './authService'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { register, login, logout } from './authActions'
 
-// Get user from local storage
-const user =  JSON.parse(localStorage.getItem('user'))
+// Get user from localStorage
+// const user = localStorage.getItem('userInfo')
+//   ? localStorage.getItem('userInfo')
+//   : null
 
+
+const userToken = localStorage.getItem('userToken')
+? localStorage.getItem('userToken')
+: null
 
 const initialState = {
-    user: user ? user : null,
-    isError: false,
-    isSuccess: false,
-    isLoading: false,
-    message: ''
+  userToken,
+  isError: false,
+  isSuccess: false,
+  isLoading: false,
+  isRegistered: false,
+  message: '',
 }
 
 
-export const authSlice  = createSlice({
-    name: 'auth',
-    initialState,
-    reducers:{
-        reset: (state) =>{
-            state.isLoading = false
-            state.isSuccess = false
-            state.isError = false
-            state.message = ''
-        }
+
+export const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {
+    reset: (state) => {
+      state.isLoading = false
+      state.isSuccess = false
+      state.isError = false
+      state.message = ''
     },
-    extraReducers: (builder) => {
-        builder
-        .addCase(register.pending, (state) => {
-          state.isLoading = true
-        })
-        .addCase(register.fulfilled, (state, action) => {
-          state.isLoading = false
-          state.isSuccess = true
-          state.user = action.payload
-        })
-        .addCase(register.rejected, (state, action) => {
-          state.isLoading = false
-          state.isError = true
-          state.message = action.payload
-          state.user = null
-        })
-        .addCase(login.pending, (state) => {
-            state.isLoading = true
-          })
-          .addCase(login.fulfilled, (state, action) => {
-            state.isLoading = false
-            state.isSuccess = true
-            state.user = action.payload
-          })
-          .addCase(login.rejected, (state, action) => {
-            state.isLoading = false
-            state.isError = true
-            state.message = action.payload
-            state.user = null
-          })
-    }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(register.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isRegistered = true;
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(login.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.userToken = localStorage.getItem('userToken');
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(logout.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.userToken = null
+      })
+  },
 })
 
-
-export const {reset} = authSlice.actions
+export const { reset } = authSlice.actions
 export default authSlice.reducer

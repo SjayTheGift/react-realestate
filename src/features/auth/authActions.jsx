@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 // const backendURL = 'http://127.0.0.1:8000'
 
-export const register = createAsyncThunk('auth/register',async (user, thunkAPI) => {
+export const register = createAsyncThunk('auth/register', async (user, thunkAPI) => {
    
       const config = {
         headers: {
@@ -14,7 +14,7 @@ export const register = createAsyncThunk('auth/register',async (user, thunkAPI) 
       }
     await axios.post(`/api/user/register/`, user, config)
     .then(res => {
-        localStorage.setItem("user", JSON.stringify(res.data))
+        // localStorage.setItem('userInfo', JSON.stringify(res.data))
         toast.success("Registered successfully")
     })
     .catch(error => {
@@ -44,7 +44,7 @@ export const register = createAsyncThunk('auth/register',async (user, thunkAPI) 
 )
 
 
-export const login = createAsyncThunk('auth/login',async (user, thunkAPI) => {
+export const login = createAsyncThunk('auth/login',async (user) => {
    
     const config = {
       headers: {
@@ -53,7 +53,7 @@ export const login = createAsyncThunk('auth/login',async (user, thunkAPI) => {
     }
   await axios.post(`/api/user/login/`, user, config)
   .then(res => {
-      localStorage.setItem('user', JSON.stringify(res.data))
+      localStorage.setItem('userToken', JSON.stringify(res.data))
       toast.success("Successfully logged-in")
   })
   .catch(error => {
@@ -84,5 +84,48 @@ export const login = createAsyncThunk('auth/login',async (user, thunkAPI) => {
           toast.error(error.message)
         }
   })
+}
+)
+
+export const logout = createAsyncThunk('auth/logout',async () => {
+    await localStorage.removeItem('userToken')
+//   const config = {
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   }
+// await axios.post(`/api/user/logout/`, config)
+// .then(res => {
+//     localStorage.removeItem('userToken')
+//     console.log(res.data)
+// })
+// .catch(error => {
+//     // const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+
+//     console.log(error)
+
+//     if (error.response) {
+
+//       if(error.response.data) {
+//         for (let x in error.response.data) {
+//              toast.error(error.response.data.detail)
+//          } 
+//      }
+//         if(error.response.data.password) {
+//            for (let x in error.response.data.password) {
+//                 toast.error(error.response.data.password[x])
+//             } 
+//         }
+//         if(error.response.data.email){
+//             for (let x in error.response.data.email) {
+//                 toast.error(error.response.data.email[x])
+//             } 
+//         }
+//       } else if (error.request) {
+//         toast.error(error.request.data)
+//       } else {
+//         toast.error(error.message)
+//       }
+// })
 }
 )
