@@ -1,10 +1,10 @@
-import React from 'react'
+// import { useEffect, useState } from 'react'
 import { LiaMoneyBillWaveSolid } from 'react-icons/lia';
 import { BiBed } from 'react-icons/bi';
 import { MdOutlineBathtub } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
-import house from '../assets/img/Crop.jpg';
+// import house from '../assets/img/Crop.jpg';
 
 const List = ({id, title, address, city, province, price, sale_type, home_type, bedrooms, bathrooms, sqft, photo_main }) => {
   // title, address, city, province, price, sale_type, home_type, bedrooms, bathrooms, sqft, photo_main
@@ -13,7 +13,7 @@ const List = ({id, title, address, city, province, price, sale_type, home_type, 
     <>
     <div className='shadow-md hover:shadow-2xl'>
       <Link to={`/details/${id}`} className="max-w-sm shadow-md rounded-lg py-5">
-        <img src={photo_main} alt="Shoes" className='rounded-t-lg w-[100%]'/>
+        <img src={photo_main} alt={title} className='rounded-t-lg object-cover h-48 w-96'/>
         <div className="card-body text-left py-3 px-3">
             <h2 className="font-bold text-xl">{title} | {sqft} sq.m</h2>
             <p className='text-gray-500 my-2'>{address}, {city}, {province}</p>

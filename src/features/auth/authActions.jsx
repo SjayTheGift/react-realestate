@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify';
+import { Navigate } from 'react-router-dom';
 
 // const backendURL = 'http://127.0.0.1:8000'
 
@@ -59,29 +60,32 @@ export const login = createAsyncThunk('auth/login',async (user) => {
   .catch(error => {
       // const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
 
-      console.log(error)
-
       if (error.response) {
 
         if(error.response.data) {
           for (let x in error.response.data) {
                toast.error(error.response.data.detail)
            } 
+           Navigate('/login')
        }
           if(error.response.data.password) {
              for (let x in error.response.data.password) {
                   toast.error(error.response.data.password[x])
               } 
+              Navigate('/login')
           }
           if(error.response.data.email){
               for (let x in error.response.data.email) {
                   toast.error(error.response.data.email[x])
               } 
+              Navigate('/login')
           }
         } else if (error.request) {
           toast.error(error.request.data)
+          Navigate('/login')
         } else {
           toast.error(error.message)
+          Navigate('/login')
         }
   })
 }

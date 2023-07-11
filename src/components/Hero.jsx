@@ -3,7 +3,7 @@ import hero from '../assets/img/hero-image.webp';
 
 import SearchHero from './SearchHero';
 
-const Hero = ({onSubmit, onChange, sale_type, province, price, bedrooms, home_type, bathrooms, sqft, listings}) => {
+const Hero = ({onSubmit, onChange, city, sale_type, province, price, bedrooms, home_type, bathrooms, sqft, listings}) => {
   return (
     <div className='bg-white relative py-16'>
       <div className='flex flex-col-reverse md:flex-row justify-between items-center w-[75%] mx-auto py-3 gap-4 md:gap-0'>
@@ -19,6 +19,7 @@ const Hero = ({onSubmit, onChange, sale_type, province, price, bedrooms, home_ty
         <SearchHero 
         onSubmit={onSubmit}
         onChange={onChange}
+        city={city}
         sale_type={sale_type}
         province={province}
         price={price}

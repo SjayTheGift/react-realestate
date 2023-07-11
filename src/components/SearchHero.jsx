@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import { AiOutlineClose } from 'react-icons/ai';
 
-const SearchHero = ({onSubmit, onChange, sale_type, province, price, bedrooms, home_type, bathrooms, sqft, listings}) => {
+const SearchHero = ({onSubmit, onChange, city, sale_type, province, price, bedrooms, home_type, bathrooms, sqft, listings}) => {
 
   const [nav, setNav] = useState(false);
 
@@ -27,6 +27,8 @@ const SearchHero = ({onSubmit, onChange, sale_type, province, price, bedrooms, h
               focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600
                dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
                dark:focus:border-blue-500" placeholder="Enter City" required 
+               name='city' 
+               onChange={e => onChange(e)} value={city}
                />
               <button type="submit" className="text-white hidden md:block  md:absolute top-2 mt-5 md:mt-0 md:right-2.5 md:bottom-2.5 bg-purple-600 px-5 py-2 rounded-full hover:bg-purple-800">Search</button>
           </div>

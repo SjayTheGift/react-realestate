@@ -38,7 +38,7 @@ function App() {
     sqft: '1000',
   });
 
-  const { sale_type, province, price, bedrooms, home_type, bathrooms, sqft } = formData;
+  const { city, sale_type, province, price, bedrooms, home_type, bathrooms, sqft } = formData;
 
   const onChange =  (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -60,9 +60,9 @@ function App() {
 
     
     setLoading(true);
-    axios.get(`http://127.0.0.1:8000/api/listings/search/?sale_type=${sale_type}&province=${province}&price=${price}&bedrooms=${bedrooms}&home_type=${home_type}&bathrooms=${bathrooms}&sqft=${sqft}`, config)
+    axios.get(`http://ec2-54-159-235-125.compute-1.amazonaws.com:8000/api/listings/search/?search=${city}&sale_type=${sale_type}&province=${province}&price=${price}&bedrooms=${bedrooms}&home_type=${home_type}&bathrooms=${bathrooms}&sqft=${sqft}`, config)
     .then(res => {
-        setLoading(false);
+        setLoading(true);
         // const pathname = window.location.pathname
       
         setListings(res.data);
@@ -76,22 +76,23 @@ function App() {
   }
 
   const fetchUserData = async () => {
-    await fetch("http://127.0.0.1:8000/api/listings/")
+    await fetch("http://ec2-54-159-235-125.compute-1.amazonaws.com:8000/api/listings/")
        .then(response => {
          return response.json()
        })
        .then(data => {
          setListings(data)
+         setLoading(true);
        })
    }
  
    useEffect(() => {
      fetchUserData()
-   }, [])
+   }, [loading])
 
 
   return (
-    <div className="font-[Poppins] bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] h-screen">
+    <div className="font-[Poppins] bg-white h-screen">
         <Navbar />
         <ToastContainer/>
         <Routes>
@@ -99,6 +100,7 @@ function App() {
           <Route path='/'  element={<Home
           onSubmit={onSubmit}
           onChange={onChange}
+          city={city}
           sale_type={sale_type}
           province={province}
           price={price}
@@ -107,12 +109,9 @@ function App() {
           bathrooms={bathrooms}
           sqft={sqft}
           listings={listings}
+          loading={loading}
           />}/>
-          <Route path='/about'  element={
-            <PrivateRoute>
-              <About/>
-            </PrivateRoute>
-          }/>
+          <Route path='/about'  element={<About/>}/>
           {/* <Route path='/listings'  element={<Listings 
           onSubmit={onSubmit}
           onChange={onChange}
