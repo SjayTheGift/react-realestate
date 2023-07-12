@@ -15,7 +15,7 @@ const ContactForm = ({name, email, subject, message, formData, setFormData}) => 
         }
     }
 
-        axios.post('http://127.0.0.1:8000/api/contact/', { name, email, subject, message }, config)
+        axios.post('https://realestateza.up.railway.app/api/contact/', { name, email, subject, message }, config)
         .then(res => {
             toast.success('Message sent!!!')
             setFormData({name:'', email:'', subject:'', message:''})
