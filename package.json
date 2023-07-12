@@ -1,6 +1,6 @@
 {
   "name": "react_real_estate",
-  "proxy": "http://ec2-54-159-235-125.compute-1.amazonaws.com:8000",
+  "proxy": "https://realestateza.up.railway.app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
