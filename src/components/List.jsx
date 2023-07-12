@@ -13,7 +13,7 @@ const List = ({id, title, address, city, province, price, sale_type, home_type, 
     <>
     <div className='shadow-md hover:shadow-2xl'>
       <Link to={`/details/${id}`} className="max-w-sm shadow-md rounded-lg py-5">
-        <img src={photo_main} alt={title} className='rounded-t-lg object-cover h-48 w-96'/>
+        <img src={photo_main} alt={title} className='rounded-t-lg object-cover h-48 w-full'/>
         <div className="card-body text-left py-3 px-3">
             <h2 className="font-bold text-xl">{title} | {sqft} sq.m</h2>
             <p className='text-gray-500 my-2'>{address}, {city}, {province}</p>
