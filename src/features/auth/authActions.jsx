@@ -4,7 +4,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify';
 import { Navigate } from 'react-router-dom';
 
-// const backendURL = 'http://127.0.0.1:8000'
+const backendURL = 'https://realestateza.up.railway.app/'
 
 export const register = createAsyncThunk('auth/register', async (user, thunkAPI) => {
    
@@ -13,7 +13,7 @@ export const register = createAsyncThunk('auth/register', async (user, thunkAPI)
           'Content-Type': 'application/json',
         },
       }
-    await axios.post(`/api/user/register/`, user, config)
+    await axios.post(`${backendURL}/api/user/register/`, user, config)
     .then(res => {
         // localStorage.setItem('userInfo', JSON.stringify(res.data))
         toast.success("Registered successfully")
@@ -52,7 +52,7 @@ export const login = createAsyncThunk('auth/login',async (user) => {
         'Content-Type': 'application/json',
       },
     }
-  await axios.post(`/api/user/login/`, user, config)
+  await axios.post(`${backendURL}/api/user/login/`, user, config)
   .then(res => {
       localStorage.setItem('userToken', JSON.stringify(res.data))
       toast.success("Successfully logged-in")
