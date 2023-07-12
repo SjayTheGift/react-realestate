@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
         '/api': {
-            target: 'http://ec2-54-159-235-125.compute-1.amazonaws.com:8000',
+            target: 'https://realestateza.up.railway.app',
             changeOrigin: true,
             secure: false,      
             ws: true,

@@ -60,7 +60,7 @@ function App() {
 
     
     setLoading(true);
-    axios.get(`http://ec2-54-159-235-125.compute-1.amazonaws.com:8000/api/listings/search/?search=${city}&sale_type=${sale_type}&province=${province}&price=${price}&bedrooms=${bedrooms}&home_type=${home_type}&bathrooms=${bathrooms}&sqft=${sqft}`, config)
+    axios.get(`https://realestateza.up.railway.app/api/listings/search/?search=${city}&sale_type=${sale_type}&province=${province}&price=${price}&bedrooms=${bedrooms}&home_type=${home_type}&bathrooms=${bathrooms}&sqft=${sqft}`, config)
     .then(res => {
         setLoading(true);
         // const pathname = window.location.pathname
@@ -76,7 +76,7 @@ function App() {
   }
 
   const fetchUserData = async () => {
-    await fetch("http://ec2-54-159-235-125.compute-1.amazonaws.com:8000/api/listings/")
+    await fetch("https://realestateza.up.railway.app/api/listings/")
        .then(response => {
          return response.json()
        })

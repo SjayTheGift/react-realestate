@@ -21,7 +21,7 @@ const Details = () => {
 
     const fetchSingleUserData = async () => {
 
-        await fetch(`http://ec2-54-159-235-125.compute-1.amazonaws.com:8000/api/listings/${id}/`)
+        await fetch(`https://realestateza.up.railway.app/api/listings/${id}/`)
           .then(response => { 
             return response.json()
           })
@@ -29,7 +29,7 @@ const Details = () => {
             setDetailListings(data)
             const realtor_id = data.realtor
             
-            fetch(`http://ec2-54-159-235-125.compute-1.amazonaws.com:8000/api/realtor/${realtor_id}/`)
+            fetch(`https://realestateza.up.railway.app/api/realtor/${realtor_id}/`)
                    .then(response => { 
                      return response.json()
                    })
