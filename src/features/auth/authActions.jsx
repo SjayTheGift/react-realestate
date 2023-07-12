@@ -4,7 +4,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify';
 import { Navigate } from 'react-router-dom';
 
-const backendURL = 'https://realestateza.up.railway.app/'
+const backendURL = 'https://realestateza.up.railway.app'
 
 export const register = createAsyncThunk('auth/register', async (user, thunkAPI) => {
    
